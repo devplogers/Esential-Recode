@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Esential Recode</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(115deg, #000000, #450000, #200000);
+      background-size: 300% 300%;
+      animation: bg 30s ease-in-out infinite alternate;
+      background-attachment: fixed;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    html, body { min-height: 100%; }
+
+    @keyframes bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1, h2, h3 { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    h1 { font-size: 3.5rem; text-align: center; text-shadow: 0 0 10px #ff0000aa; }
+    h2 { font-size: 2rem; text-align: center; margin-bottom: 1rem; }
+    p { font-size: 1rem; margin-bottom: 1rem; }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.5rem; }
+    }
+
+    a { color: #fff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      margin: 0.5rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      background: #ff3030cc;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+    }
+    .btn:hover {
+      background: #ff5050;
+      box-shadow: 0 0 10px  #ff2020;
+      transform: translateY(-2px);
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px) saturate(150%);
+      -webkit-backdrop-filter: blur(5px) saturate(150%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo svg {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 0 5px #ff0000cc);
+    }
+    .logo-text {
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .nav-links a {
+      margin-left: 2rem;
+      font-size: 1rem;
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #ff8080;
+    }
+
+    @media (max-width: 400px) {
+      .logo-text { display: none; }
+      .nav-links a.nav-home { display: none; }
+      .nav-links a { margin-left: 1rem; font-size: 0.9rem; }
+    }
+
+    section {
+      position: relative;
+      padding: 4rem 1rem;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+    section.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .section-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 6rem 1rem 4rem 1rem;
+    }
+    #hero h1 {
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    #hero p.tagline {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ffdddd;
+    }
+
+    #features .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px) saturate(180%);
+      -webkit-backdrop-filter: blur(4px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #efefef;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#hero" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <polygon points="50,10 90,90 10,90" fill="#ff2222"/>
+          <circle cx="50" cy="63" r="8" fill="#ffffff"/>
+        </svg>
+        <span class="logo-text">Esential Recode</span>
+      </a>
+      <div class="nav-links">
+        <a href="#hero" class="nav-home">Главная</a>
+        <a href="#features">Особенности</a>
+        <a href="#download">Скачать</a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="section-inner">
+      <h1>Esential Recode</h1>
+      <p class="tagline">Эксплойт для Minecraft</p>
+      <p>Мощный функционал, стабильная работа и максимальная свобода в игре</p>
+      <a href="#download" class="btn">Скачать</a>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-inner">
+      <h2>Возможности</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Скорость</h3>
+          <p>Молниеносный запуск и работа без лагов</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛠️</div>
+          <h3>Инструменты</h3>
+          <p>Модификации и расширения без ограничений</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Безопасность</h3>
+          <p>Современные алгоритмы обхода защиты</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="section-inner">
+      <h2>Скачать</h2>
+      <p>Получите доступ к полной версии прямо сейчас</p>
+      <a href="#" class="btn">Загрузить</a>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:2rem;color:#888;font-size:0.9rem">
+    &copy; 2025 Esential Recode. Не связан с Mojang. Только для образовательных целей.
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show')
+          obs.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.1 })
+
+    document.querySelectorAll('section').forEach(sec => {
+      if (sec.id !== 'hero') observer.observe(sec)
+      else sec.classList.add('show')
+    })
+  </script>
+</body>
+</html>
